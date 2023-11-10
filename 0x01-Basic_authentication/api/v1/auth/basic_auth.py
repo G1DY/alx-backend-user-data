@@ -30,6 +30,6 @@ class BasicAuth(Auth):
         """returns the user email and password from the Base64 decoded value"""
         if decoded_b64_auth_header is None or not isinstance(
                 decoded_b64_auth_header, str) \
-            or ':' not in decoded_b64_auth_header:
+           or ':' not in decoded_b64_auth_header:
             return (None, None)
         return decoded_b64_auth_header.split(':', 1)
