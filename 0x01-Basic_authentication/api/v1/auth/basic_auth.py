@@ -22,13 +22,11 @@ class BasicAuth(Auth):
         if b64_auth_header is None or not isinstance(b64_auth_header, str):
             return None
         try:
-            decoded_bytes = base64.b64decode(b64_auth_header)
-        except base64.binascii.Error:
+            b64 = base64.b64decode(b64_auth_header)
+            b64_decode = b64.decode('utf-8')
+        except Exception:
             return None
-        try:
-            return decoded_bytes.decode('utf-8')
-        except UnicodeDecodeError:
-            return None
+        return b64_decode
 
     def extract_user_credentials(
             self, decoded_b64_auth_header: str) -> (str, str):
@@ -69,7 +67,7 @@ class BasicAuth(Auth):
         user_credentials = self.extract_user_credentials(decode_base64)
         if user_credentials is None or len(user_credentials) != 2:
             return None
-        user_email, user_password = user_credetials
+        user_email, user_password = user_credentials
         user_instance = self.user_object_from_credentials(
                 user_email, user_password)
         return user_instance
