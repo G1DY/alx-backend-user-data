@@ -17,8 +17,6 @@ class Auth:
         return not any(path.startswith(excluded_path[:-1]) for
                        excluded_path in excluded_paths)
 
-        return path not in excluded_paths
-
     def authorization_header(self, request=None) -> str:
         """returns None - request will be the Flask request object"""
         if request is None or 'Authorization' not in request.headers:
