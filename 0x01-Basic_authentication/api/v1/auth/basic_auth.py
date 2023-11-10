@@ -11,6 +11,6 @@ class BasicAuth(Auth):
         """returns the Base64 part of the Authorization header"""
         if auth_header is None or not isinstance(auth_header, str):
             return None
-        if 'Basic' not in auth_header:
+        if not auth_header.startswith("Basic "):
             return None
-        return auth_header[6:]
+        return auth_header.split(" ")[1]
