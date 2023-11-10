@@ -8,11 +8,14 @@ class Auth:
     """manages API authentication"""
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """returns False - path and excluded_paths"""
-        if path is None or excluded_paths is None or not excluded_paths:
+        if path is None or not excluded_paths:
             return True
         # make sure all paths end with a slash for comparison
         path = path.rstrip("/") + "/"
-        excluded_paths = [p.rstrip("/") + "/" for p in excluded_paths]
+        excluded_paths = [p.rstrip("/") + ("/" if p.endswith("*")
+                          else "") for p in excluded_paths]
+        return not any(path.startswith(excluded_path[:-1]) for
+                       excluded_path in excluded_paths)
 
         return path not in excluded_paths
 
