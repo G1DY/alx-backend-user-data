@@ -61,5 +61,5 @@ If the credentials are invalid, the server responds with a 401 Unauthorized stat
 
 | Task | Description |
 | ---- | ----------- |
-| 0. Simple-basic-API | Download and start your project from this `archive.zip` In this archive, you will find a simple API with one model: User. Storage of these users is done via a serialization/deserialization in files. |
+| 0. Simple-basic-API | Download and start your project from this [archive.zip](https://intranet.alxswe.com/rltoken/2o4gAozNufil_KjoxKI5bA) In this archive, you will find a simple API with one model: User. Storage of these users is done via a serialization/deserialization in files. |
 
