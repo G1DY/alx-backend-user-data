@@ -2,6 +2,8 @@
 """module with class SessionAuth"""
 from api.v1.auth.auth import Auth
 import uuid
+from models.user import User
+from flask.globals import session
 
 
 class SessionAuth(Auth):
