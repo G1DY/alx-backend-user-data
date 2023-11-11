@@ -11,18 +11,18 @@ from flask import jsonify, request
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def session_login() -> str:
     """handles user authetication using Session ID"""
-    user_email = request.form.get('user_email')
-    user_password = request.form.get('user_password')
+    user_email = request.form.get('email')
+    user_password = request.form.get('password')
 
     if not user_email:
         return jsonify({"error": "email missing"}), 400
     if not user_password:
         return jsonify({"error": "password missing"}), 400
-    user = User.search({'user_email': email})
+    user = User.search({'user_email': user_email})
     if not user:
         return jsonify({"error": "no user found for this email"}), 404
 
-    is_valid_user = is_valid_user[0]
+    is_valid_user = user[0]
     if not is_valid_user.is_valid_password(user_password):
         return jsonify({"error": "wrong password"}), 401
 
