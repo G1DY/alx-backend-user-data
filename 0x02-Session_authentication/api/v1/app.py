@@ -46,6 +46,7 @@ def forbidden(error) -> str:
 @app.before_request
 def before_request() -> str:
     """filters each request"""
+    request.current_user = auth.current_user(request)
     path_list = [
         '/api/v1/status/',
         '/api/v1/unauthorized/',
