@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """module with class SessionAuth"""
 from api.v1.auth.auth import Auth
-from uuid import uuid4
+import uuid
 
 
 class SessionAuth(Auth):
