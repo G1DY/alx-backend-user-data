@@ -4,6 +4,7 @@ from api.v1.auth.auth import Auth
 import uuid
 from models.user import User
 from flask.globals import session
+from typing import Dict
 
 
 class SessionAuth(Auth):
@@ -41,12 +42,17 @@ class SessionAuth(Auth):
         user_id = User.get(session_user_id)
         return user_id
 
-    def destroy_session(self, request=None):
+    def destroy_session(self, request=None) -> bool:
         """deletes the user session / logout:"""
-        cookie_data = self.session_cookie(request)
-        if cookie_data is None:
+        if request is None:
             return False
-        if not self.user_id_for_session_id(cookie_data):
+        session_id = self.session_cookie(request)
+        if not session_id:
             return False
-        del self.user_id_by_session_id[cookie_data]
+
+        user_id = self.user_id_for_session_id(session_id)
+        if not user_id:
+            return False
+
+        del self.user_id_by_session_id[session_id]
         return True
