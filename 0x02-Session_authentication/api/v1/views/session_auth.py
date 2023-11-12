@@ -6,6 +6,7 @@ from api.v1.views import app_views
 from models.user import User
 from os import getenv, abort, environ
 from flask import jsonify, request
+from werkzeug import exceptions
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
@@ -38,7 +39,7 @@ def session_login() -> str:
 
 @app_views.route(
     '/auth_session/logout',
-    method=['DELETE'],
+    methods=['DELETE'],
     strict_slashes=False)
 def session_logout() -> str:
     """DELETE /api/v1/auth_session/logout"""
