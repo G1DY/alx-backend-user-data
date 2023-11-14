@@ -2,6 +2,8 @@
 """flask app"""
 from flask import Flask, jsonify, request, abort
 from flask.helpers import make_response
+from db import DB
+from user import User
 from auth import Auth
 
 
