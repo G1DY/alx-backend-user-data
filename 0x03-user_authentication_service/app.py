@@ -47,7 +47,7 @@ def login():
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
-    """contain the session ID as a cookie with key "session_id"
+    """contain the session ID as a cookie with key session_id
         -return 403 if user does not exist
     """
     user_cookie = request.cookies.get("session_id", None)
