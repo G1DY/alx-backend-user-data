@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """flask app"""
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect
 from flask.helpers import make_response
 from db import DB
 from user import User
@@ -43,6 +43,19 @@ def login():
                                       "message": "logged in"}))
     response.set_cookie('session_id', AUTH.create_session(user_email))
     return response
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """contain the session ID as a cookie with key "session_id"
+        -return 403 if user does not exist
+    """
+    user_cookie = request.cookies.get("session_id", None)
+    user = AUTH.get_user_from_session_id(user_cookie)
+    if user_cookie is None or user is None:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect('/')
 
 
 if __name__ == "__main__":
