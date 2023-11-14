@@ -15,7 +15,7 @@ def get_payload():
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
-def users(email: str, password: str) -> str:
+def users() -> str:
     """end-point to register a user"""
     email = request.form.get('email')
     password = request.form.get('password')
