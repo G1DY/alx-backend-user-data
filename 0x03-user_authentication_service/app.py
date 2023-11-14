@@ -40,7 +40,7 @@ def login():
     if not valid_log:
         abort(401)
     response = make_response(jsonify({"email": user_email,
-                                      "message": "looged in"}))
+                                      "message": "logged in"}))
     response.set_cookie('session_id', AUTH.create_session(user_email))
     return response
 
