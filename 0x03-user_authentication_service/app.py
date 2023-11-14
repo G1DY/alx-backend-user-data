@@ -36,8 +36,8 @@ def login():
     user_request = request.form
     user_email = user_request.get('email', '')
     user_password = user_request.get('password', '')
-    valid_login = AUTH.valid_login(user_email, user_password)
-    if not valid_login:
+    valid_log = AUTH.valid_login(user_email, user_password)
+    if not valid_log:
         abort(401)
     response = make_response(jsonify({"email": user_email,
                                       "message": "looged in"}))
