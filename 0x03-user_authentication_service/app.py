@@ -92,7 +92,6 @@ def update_password():
     reset_token = request.form.get('reset_token')
     new_password = request.form.get('new_password')
     try:
-        AUTH.validate_reset_token(user_email, reset_token)
         AUTH.update_password(reset_token, new_password)
     except Exception:
         abort(403)
