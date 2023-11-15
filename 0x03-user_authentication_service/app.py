@@ -64,7 +64,7 @@ def profile():
         abort(403)
     user = get_user_from_session(session_id)
     if user:
-        return jsonify({"email": "email"})
+        return jsonify({"email": user.email})
     else:
         abort(403)
 
