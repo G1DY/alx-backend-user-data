@@ -81,7 +81,7 @@ def get_reset_password_token() -> str:
     registered_emails = AUTH.create_session(user_email)
     if not registered_emails:
         abort(403)
-    reset_token = AUTH.get_reset_password_token(email)
+    reset_token = AUTH.get_reset_password_token(user_email)
     return jsonify({"email": user_email, "reset_token": reset_token}), 200
 
 
