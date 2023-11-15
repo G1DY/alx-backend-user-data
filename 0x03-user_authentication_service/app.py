@@ -59,11 +59,14 @@ def logout():
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile():
     """returns user profile or 403 if the user is invalid"""
-    user_cookie = request.cookies.get("session_id", None)
-    user = AUTH.get_user_from_session_id(user_cookie)
-    if user_cookie is None or user is None:
+    session_id = request.cookies.get("session_id", None)
+    if not session_id:
         abort(403)
-    return jsonify({"email": "<user email>"}), 200
+    user = get_user_from_session(session_id)
+    if user:
+        return jsonify({"email": "email"})
+    else:
+        abort(403)
 
 
 if __name__ == "__main__":
