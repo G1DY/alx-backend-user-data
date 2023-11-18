@@ -5,6 +5,7 @@ import re
 import os
 import logging
 import mysql.connector
+import csv
 
 
 class RedactingFormatter(logging.Formatter):
