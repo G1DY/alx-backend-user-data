@@ -45,7 +45,11 @@ def get_logger() -> logging.Logger:
     logger.setLevel(logging.INFO)
     logger.propagate = False
 
-    formatter = RedactingFormatter(list(PII_FIELDS))
+    formatter = RedactingFormatter(PII_FIELDS,
+                                   fmt='%(asctime) - %(levelname)s -\
+                                        %(message)s', datefmt='%Y-%m-%d\
+                                        %H:%M:%S')
+
     stream_handler.setFormatter(formatter)
 
     logger.addHandler(stream_handler)
